@@ -7,6 +7,7 @@ import { FormApartmentComponent } from './form-apartment/form-apartment.componen
 import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
+  {path:'', redirectTo:'residences', pathMatch:'full'}, 
   {path:'residences', component:ResidencesComponent},
   {path:'addresidence', component:FormResidenceComponent},
   {path:'detailsRsidence/:x', component:ApartmentsComponent},

@@ -9,6 +9,7 @@ import { FormResidenceComponent } from './form-residence/form-residence.componen
 import { ApartmentsComponent } from './apartments/apartments.component';
 import { FormApartmentComponent } from './form-apartment/form-apartment.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
