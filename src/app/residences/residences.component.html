@@ -1,8 +1,5 @@
-<ul class="list-group">
-    <li class="list-group-item" *ngFor="let R of listResidences">
-        {{R.name}} 
-        <button class="btn btn-primary" [routerLink]="['/detailsRsidence',R.id]">Show Apartments</button>
-    </li>
+<ul class="list-group" *ngFor="let R of listResidences">
+    <app-residence-item [residence]="R" (E)="deletResidence($event)"></app-residence-item>
 </ul>
 
 

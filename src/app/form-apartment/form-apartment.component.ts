@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ApartmentService } from '../Services/apartment.service';
 
 @Component({
   selector: 'app-form-apartment',
@@ -10,10 +11,10 @@ import { ActivatedRoute } from '@angular/router';
 export class FormApartmentComponent {
 
 apartForm= new FormGroup({
-  id: new FormControl(''),
+  id: new FormControl(),
   appartNum: new FormControl('', [Validators.required, Validators.min(1)]),
-  floorNum: new FormControl(''),
-  surface: new FormControl(''),
+  floorNum: new FormControl('',Validators.required),
+  surface: new FormControl('',Validators.required),
   terrace: new FormControl(''),
   surfaceTerrace: new FormControl(''),
   category: new FormControl(''),
@@ -21,13 +22,28 @@ apartForm= new FormGroup({
   residence: new FormControl('')
 });
 id!:any;
-constructor(private actR:ActivatedRoute){}
+idApart!:Number;
+constructor(private actR:ActivatedRoute, private aparS:ApartmentService){}
 
 ngOnInit(){
   this.id=Number(this.actR.snapshot.paramMap.get('id'));
   this.apartForm.patchValue({residence:this.id});
+  this.aparS.getAllApartments().subscribe((data) => {this.idApart=data.length+1;
+  this.apartForm.patchValue({id:this.idApart})});
+  
 }
-get appartNum(){
-  return this.apartForm.get('appartNum');
+get apartNum() { return this.apartForm.get('appartNum'); }
+get floorNum() { return this.apartForm.get('floorNum'); }
+get surface() { return this.apartForm.get('surface'); }
+get surfaceTerrace() { return this.apartForm.get('surfaceTerrace'); }
+get terrace() { return this.apartForm.get('terrace'); }
+get category() { return this.apartForm.get('category'); }
+get description() { return this.apartForm.get('description'); }
+get residence() { return this.apartForm.get('residence'); }
+
+
+addApart(){
+  console.log(this.apartForm.value);
+//this.aparS.addApartment().subscribe();
 }
 }

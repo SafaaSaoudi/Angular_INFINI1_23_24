@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +11,8 @@ import { ApartmentsComponent } from './apartments/apartments.component';
 import { FormApartmentComponent } from './form-apartment/form-apartment.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ResidenceItemComponent } from './residence-item/residence-item.component';
+import { ErrorsComponent } from './errors/errors.component';
 
 @NgModule({
   declarations: [
@@ -19,12 +22,15 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormResidenceComponent,
     ApartmentsComponent,
     FormApartmentComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ResidenceItemComponent,
+    ErrorsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

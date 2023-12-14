@@ -1,73 +1,123 @@
-
 <div class="container">
-
-    
-    <form [formGroup]="apartForm">
-    <div class="form-group">
-      <label for="apartNum">Apartment Number</label>
-      <input type="text" class="form-control" id="apartNum" formControlName="appartNum" >
-     <!-- <span class="text-danger" *ngIf="appartNum?.invalid && appartNum?.touched">Appart Num is Required</span> -->
-     <span class="text-danger" *ngIf="appartNum?.invalid && appartNum?.touched && appartNum?.errors?.['min']">Appart Num at least 1</span>
-     <span class="text-danger" *ngIf="appartNum?.invalid && appartNum?.touched && appartNum?.errors?.['required']">Appart Num is required</span>
-    </div>
-    <div class="form-group">
-        <label for="floorNum">Floor Number</label>
-        <input type="text" class="form-control" id="floorNum" formControlName="floorNum">
+  <br><br>
+  <form [formGroup]="apartForm">
+      <div class="row mb-3">
+          <label for="apartNum" class="col-sm-2 col-col-sm-2 col-form-label">Apartment Number: </label>
+          <div class="col-sm-10">
+              <input type="text" class="form-control" name="apartNum" id="apartNum" formControlName="apartNum" />
+              <div *ngIf="apartNum?.touched && apartNum?.invalid" class=" alert text-danger">
+                  <div *ngIf="apartNum?.errors?.['required']">
+                      Required field
+                  </div>
+                  <div *ngIf="apartNum?.errors?.['pattern']">
+                      Champ doit être des chiffres
+                  </div>
+              </div>
+          </div>
       </div>
 
-    <div class="form-group">
-        <label for="surface">Surface</label>
-        <input type="text" class="form-control" id="surface" formControlName="surface" >
-    </div>
-    <div>
-        <label for="terrace">Terrace</label>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="terrace" id="terrace1" value="yes" formControlName="terrace">
-            <label class="form-check-label" for="terrace1">
-              Yes
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="terrace" id="terrace2" value="No" formControlName="terrace">
-            <label class="form-check-label" for="terrace1">
-              No
-            </label>
-          </div>
-    </div>
-    <div class="form-group">
-        <label for="surfaceT">Surface Terrace</label>
-        <input type="text" class="form-control" id="surfaceT" formControlName="surfaceTerrace" >
-    </div>
-    <div>
-        <label for="categorie">Terrace</label>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="category" id="s+1" value="s+1" formControlName="category">
-            <label class="form-check-label" for="s+1">
-              S+1
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="category" id="s+2" value="s+2" formGroupName="category">
-            <label class="form-check-label" for="s+2">
-              S+2
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="category" id="s+3" value="s+3" formControlName="category">
-            <label class="form-check-label" for="s+3">
-              S+3
-            </label>
+      <div class="row mb-3">
+          <label for="floorNum" class="col-sm-2 col-form-label">Floor Number: </label>
+          <div class="col-sm-10">
+              <input type="number" class="form-control" name="floorNum" id="floorNum" formControlName="floorNum" />
+              <div *ngIf="floorNum!.touched && floorNum!.invalid" class="alert text-danger">
+                  Required field
+              </div>
           </div>
 
-          <div class="form-group">
-            <label for="Description">Description</label>
-            <textarea class="form-control" id="Description" rows="3" formControlName="description"></textarea>
+      </div>
+      <div class="row mb-3">
+          <label for="surface" class="col-sm-2 col-form-label">Surface: </label>
+          <div class="col-sm-10">
+              <input type="number" class="form-control" name="surface" id="surface" />
+              <div *ngIf="surface!.touched && surface!.invalid" class="alert text-danger">
+                  Required field
+              </div>
           </div>
-    </div>
-    <div class="form-group">
-        <label for="residence">Residence</label>
-        <input type="text" class="form-control" id="residence" readonly  formControlName="residence">
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+      </div>
+
+      <div class="row mb-3">
+          <label for="terrace" class="col-sm-2 col-form-label"> Terrace: </label>
+          <div class="col-sm-10">
+              <div class="form-check">
+                  <input type="radio" class="form-check-input" name="terrace" formControlName="terrace" id="terrace" value="yes" />
+                  <label class="form-check-label" for="terrace">
+              Yes
+            </label>
+              </div>
+              <div class="form-check">
+                  <input type="radio" class="form-check-input" name="terrace" formControlName="terrace" id="terrace" value="no" />
+                  <label class="form-check-label" for="terrace">
+                  No
+                </label>
+              </div>
+              <div *ngIf="terrace!.touched && terrace!.invalid" class="alert text-danger">
+                  Required field
+              </div>
+          </div>
+      </div>
+
+      <div class="row mb-3">
+          <label for="surfaceTerrace" class="col-sm-2 col-form-label">Surface Terrace: </label>
+          <div class="col-sm-10">
+              <input type="number" class="form-control" name="surfaceTerrace" id="surfaceTerrace" [disabled]="terrace?.value=='no'" />
+              <div *ngIf="surfaceTerrace!.touched && surfaceTerrace!.invalid" class=" alert text-danger">
+                  Required field
+              </div>
+          </div>
+      </div>
+      <div class="row mb-3">
+          <label for="category" class="col-sm-2 col-form-label">Category: </label>
+          <div class="col-sm-10">
+              <div class="form-check">
+                  <input type="radio" class="form-check-input" name="category" id="category" value="S+1" />
+                  <label class="form-check-label" for="category">
+          S+1
+        </label>
+              </div>
+              <div class="form-check">
+                  <input type="radio" class="form-check-input" name="category" id="category" value="S+2" />
+                  <label class="form-check-label" for="category">
+          S+2
+        </label>
+              </div>
+              <div class="form-check">
+                  <input type="radio" class="form-check-input" name="category" id="category" value="S+3" />
+                  <label class="form-check-label" for="category">
+          S+3
+        </label>
+              </div>
+              <div *ngIf="category!.touched && category!.invalid" class=" alert text-danger">
+                  Required field
+              </div>
+          </div>
+      </div>
+      <div class="row mb-3">
+          <label for="description" class="col-sm-2 col-form-label">Description: </label>
+          <div class="col-sm-10">
+              <textarea name="description" class="form-control" id="description" formControlName="description"></textarea>
+              <div *ngIf="description?.touched && description?.invalid" class=" alert text-danger">
+                  <div *ngIf="description?.errors?.['required']" class="alert text-danger">
+                      Required field
+                  </div>
+                  <div *ngIf="description?.errors?.['minlength']" class="text-danger">
+                      Minimum 10 caracters
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="row mb-3">
+          <label for="residence" class="col-sm-2 col-form-label">Residence: </label>
+          <div class="col-sm-10">
+              <input type="text" class="form-control" name="residence" id="residence" formControlName="residence" />
+              <div *ngIf="residence?.touched && residence?.invalid" class="alert text-danger">
+                  Required field
+              </div>
+          </div>
+      </div>
+      <div class="mb-3">
+          <input type="submit" class="btn btn-primary" [disabled]="apartForm.valid" value="Add" (click)="addApart()" />
+      </div>
+  </form>
+
 </div>

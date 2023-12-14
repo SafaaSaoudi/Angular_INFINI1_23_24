@@ -1,0 +1,5 @@
+<li class="list-group-item">
+  {{residence.name}} 
+  <button class="btn btn-primary"  (click)="deleteFromParent()"> Delete</button>
+    <button class="btn btn-primary" [routerLink]="['/detailsRsidence',residence.id]">Show Apartments</button>
+</li>
